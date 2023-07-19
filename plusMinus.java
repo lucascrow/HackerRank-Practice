@@ -13,33 +13,37 @@ import static java.util.stream.Collectors.toList;
 class Result {
 
     /*
-     * Complete the 'plusMinus' function below.
+     * Complete the 'miniMaxSum' function below.
      *
      * The function accepts INTEGER_ARRAY arr as parameter.
      */
 
-    public static void plusMinus(List<Integer> arr) {
-    int posCount = 0;
-    int negCount = 0;
-    int zerCount = 0;
-    float ratio = 0;
-    int length = arr.size();
-    //java.util.ArrayList.size(arr);
+    public static void miniMaxSum(List<Integer> arr) {
+    long minSum = 0;
+    long maxSum = 0;
+    //int length = arr.size();
     
-    for(int i = 0; i < length; i++)
+    arr.sort(Comparator.naturalOrder());
+    
+    /*    for(int i = 0; i < length; i++)
     {
-        if(arr.get(i)>0)posCount++;
-        else if(arr.get(i)<0)negCount++;
-        else zerCount++;
-    }
-    ratio = (float)posCount/length;
-    System.out.printf("%.6f\n", ratio);
-    ratio = (float)negCount/length;
-    System.out.printf("%.6f\n", ratio);
-    ratio = (float)zerCount/length;
-    System.out.printf("%.6f\n", ratio);
+        System.out.printf("%d ", arr.get(i));
+    }*/
+    
+    for(int i = 0; i < 4; i++)
+    {
+        minSum = minSum + arr.get(i);
     }
     
+    for(int i = 1; i < 5; i++)
+    {
+        maxSum = maxSum + arr.get(i);
+    }
+    
+    System.out.printf("%d %d", minSum, maxSum);
+    
+    
+}
 
 }
 
@@ -47,13 +51,11 @@ public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(bufferedReader.readLine().trim());
-
         List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
             .map(Integer::parseInt)
             .collect(toList());
 
-        Result.plusMinus(arr);
+        Result.miniMaxSum(arr);
 
         bufferedReader.close();
     }
