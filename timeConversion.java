@@ -14,19 +14,42 @@ class Result {
 
     /*
      * Complete the 'timeConversion' function below.
-     *
+
      * The function is expected to return a STRING.
      * The function accepts STRING s as parameter.
      */
 
     public static String timeConversion(String s) {
-    String newTime = s.toString();
+    //Extracts the first two characters from the input string s, which represent the hours portion of the time
+    String a = s.substring(0, 2);
+    
+    //Declares an integer variable hour to store the hour value after conversion
+    int hour;
+    
+    // Check if the time is in the afternoon (PM) and not equal to 12
+    if (s.charAt(8) == 'P' && !a.equals("12")) {
+        
+        //Converts the extracted hours string a to an integer, adds 12 to it (to convert it to the 24-hour format), and stores the result in hour
+        hour = Integer.parseInt(a) + 12;
+        
+        //Converts the updated hour back to a string and assigns it to a.
+        a = Integer.toString(hour);
+    }
+    // Check if the time is midnight (12 AM)
+    else if (a.equals("12") && s.charAt(8) == 'A') {
+        a = "00";
+    }
+    //Returns the converted time string; it concatenates the modified a (hours) with the rest of the original string s, starting from the 3rd character (minutes) to the 8th character (seconds)
+    return a + s.substring(2, 8);
+    }
+    
+    /*String newTime = s;
         
         if (s.contains("AM"))
         {
             for (int i = 0; i < s.length()-2; i++)
             {
-                newTime += s.charAt(i);
+                newTime.charAt(i) = s.charAt(i);
             }
             
         } /*else for (int i = 0; i < s.length()-2; i++) {
@@ -63,13 +86,12 @@ class Result {
                 newString += stringToBeInserted;
             }
             
-            newTime += s.charAt(i);*/
+            newTime += s.charAt(i);
 
         }
-    System.out.println(newTime);
+    System.out.println("%s" + newTime);
     return newTime;
-    }
-
+    }*/
 }
 
 public class Solution {
