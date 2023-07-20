@@ -19,9 +19,31 @@ class Result {
      */
 
     public static void miniMaxSum(List<Integer> arr) {
-    // Write your code here
-
+    long minSum = 0;
+    long maxSum = 0;
+    //int length = arr.size();
+    
+    arr.sort(Comparator.naturalOrder());
+    
+    /*    for(int i = 0; i < length; i++)
+    {
+        System.out.printf("%d ", arr.get(i));
+    }*/
+    
+    for(int i = 0; i < 4; i++)
+    {
+        minSum = minSum + arr.get(i);
     }
+    
+    for(int i = 1; i < 5; i++)
+    {
+        maxSum = maxSum + arr.get(i);
+    }
+    
+    System.out.printf("%d %d", minSum, maxSum);
+    
+    
+}
 
 }
 
