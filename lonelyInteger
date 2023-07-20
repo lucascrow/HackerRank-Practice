@@ -18,11 +18,52 @@ class Result {
      * The function is expected to return an INTEGER.
      * The function accepts INTEGER_ARRAY a as parameter.
      */
-
+    
+public static int lonelyinteger(List<Integer> a) { 
+//This variable will be used to store the final result of the XOR operation
+int result = 0;
+//Sorts the list a in ascending order. It seems that the code is assuming the input list a is a list of integers
+Collections.sort(a);
+//Inside the loop, the code performs an XOR operation between the current value of result and the element at the current index i in the list a. The XOR operator ^ returns 1 if the bits of the two operands are different and 0 if they are the same. Essentially, the code is XORing all the elements in the list together.
+for (int i = 0; i < a.size(); i++) {
+    result = result ^ a.get(i);
+}
+//Result of the XOR operation is stored in result, and it is returned
+return result;
+}
+     
+/*Slow version
     public static int lonelyinteger(List<Integer> a) {
-    // Write your code here
-
+    int target = -1;
+    int i = 0;
+    int length = a.size();
+    //System.out.println("Length of the List: " + length);
+    
+    //Case if lonely int is extra lonely
+    if (length == 1) {
+        return a.get(i);
     }
+    
+    a.sort(Comparator.naturalOrder());
+
+    /*for(i = 0; i < length; i++)
+    {
+        System.out.printf("%d ", a.get(i));
+    }*/
+    //Case if lonely int is in the middle
+/*  for(i = 0; i < length--; i++){
+        System.out.printf("%d ", a.get(i));
+        if (a.get(i) == a.get(i+1)){
+            break;
+        }else target = a.get(i+1);
+    }
+    //Case if lonely int is at the end
+    if (target == -1) {
+        target = a.get(length++);
+    }
+        
+    return target;
+    }*/
 
 }
 
