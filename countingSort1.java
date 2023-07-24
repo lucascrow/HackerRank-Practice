@@ -20,25 +20,37 @@ class Result {
      */
 
     public static List<Integer> countingSort(List<Integer> arr) {
-    List<Integer> result = new ArrayList<>(100);
-    for (int i = 0; i < 100; i++) {
-            result.add(0);
-        }
+    int[] count = new int[100];
     int num = 0;
     int value = 0;
+
+    for (int i = 0; i < arr.size(); i++) {
+        num = arr.get(i);
+        count[num]++;
+        }
+        
     System.out.printf("i    arr[i]  result");
+        
+    List<Integer> result = new ArrayList<>(100);
+    for (int i = 0; i < 100; i++) {
+            value = count[i];
+            result.add(value);
+            System.out.printf("%d   %d  ", i, arr.get(i)); 
+            System.out.println("" + result); 
+        }
     
-    for(int i=0;i<arr.size(); i++){
+    /*for(int i=0;i<arr.size(); i++){
         num = arr.get(i);
         value = result.get(num);
-        result.set(num, ++value);
+        //Optimize code by removing unesseasary ".set" calls, improving time and efficiency
+        result.set(num, ++value); 
         System.out.printf("%d   %d  ", i, arr.get(i)); 
         System.out.println("" + result); 
-        /*for(int j=0; j<98; j++){
+        for(int j=0; j<98; j++){
             System.out.printf("%d,", result.get(j));
         }
             System.out.printf("%d]", result.get(99));*/
-    }
+    
     return result;
     }
 
