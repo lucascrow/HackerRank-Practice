@@ -13,30 +13,33 @@ import static java.util.stream.Collectors.toList;
 class Result {
 
     /*
-     * Complete the 'diagonalDifference' function below.
+     * Complete the 'countingSort' function below.
      *
-     * The function is expected to return an INTEGER.
-     * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts INTEGER_ARRAY arr as parameter.
      */
 
-    public static int diagonalDifference(List<List<Integer>> arr) {
-    int total = 0;
-    int rSum = 0;
-    int lSum = 0;
-    int j = arr.size()-1; 
-    //System.out.printf("J is %d\n",j);
+    public static List<Integer> countingSort(List<Integer> arr) {
+    List<Integer> result = new ArrayList<>(100);
+    for (int i = 0; i < 100; i++) {
+            result.add(0);
+        }
+    int num = 0;
+    int value = 0;
+    System.out.printf("i    arr[i]  result");
     
-    for(int i = 0; i<arr.size(); i++){
-        rSum += arr.get(i).get(i);
-        //System.out.printf("Value is %d\n", arr.get(i).get(i));
-        lSum += arr.get(i).get(j);
-        //System.out.printf("Value is %d\n", arr.get(i).get(j));
-        j--;
+    for(int i=0;i<arr.size(); i++){
+        num = arr.get(i);
+        value = result.get(num);
+        result.set(num, ++value);
+        System.out.printf("%d   %d  ", i, arr.get(i)); 
+        System.out.println("" + result); 
+        /*for(int j=0; j<98; j++){
+            System.out.printf("%d,", result.get(j));
+        }
+            System.out.printf("%d]", result.get(99));*/
     }
-    //System.out.printf("rSum is %d",rSum);
-    //System.out.printf("lSum is %d",lSum);
-    total = Math.abs(rSum-lSum);
-    return total;
+    return result;
     }
 
 }
@@ -48,24 +51,18 @@ public class Solution {
 
         int n = Integer.parseInt(bufferedReader.readLine().trim());
 
-        List<List<Integer>> arr = new ArrayList<>();
+        List<Integer> arr = Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+            .map(Integer::parseInt)
+            .collect(toList());
 
-        IntStream.range(0, n).forEach(i -> {
-            try {
-                arr.add(
-                    Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-                        .map(Integer::parseInt)
-                        .collect(toList())
-                );
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        List<Integer> result = Result.countingSort(arr);
 
-        int result = Result.diagonalDifference(arr);
-
-        bufferedWriter.write(String.valueOf(result));
-        bufferedWriter.newLine();
+        bufferedWriter.write(
+            result.stream()
+                .map(Object::toString)
+                .collect(joining(" "))
+            + "\n"
+        );
 
         bufferedReader.close();
         bufferedWriter.close();
